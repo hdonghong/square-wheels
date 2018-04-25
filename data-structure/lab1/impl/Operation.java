@@ -20,7 +20,6 @@ public class Operation {
              i++);
         return i == table.length-1;
     }
-
     /**
      * 判断对象数组是否已按升序排序
      * @param table 对象数组
@@ -47,37 +46,25 @@ public class Operation {
             table[i] = table[n-1-i];
             table[n-1-i] = temp;
         }
-        System.out.println("空间复杂度：" + table.length);
-        System.out.println("时间复杂度：" + (table.length >> 1) + "\n");
         return table;
     }
 
     /**
      * 递归算法实现gcd(a, b)求两个整数a，b最大公因数
-     * @param a 整数a
-     * @param b 整数b
      * @return 两个整数a，b的最小公倍数
      */
     public static int gdc(int a, int b) {
         return b != 0 ? gdc(b, a%b): a;
     }
-
-
     /**
      * 求两个整数a，b的最小公倍数
-     * @param a 数a
-     * @param b 数b
      * @return
      */
     public static int minComMltp(int a, int b) {
         return a * b / gdc(a, b);
     }
-
     /**
      * 求三个数a,b,c的最大公约数
-     * @param a 数a
-     * @param b 数b
-     * @param c 数c
      * @return 三个数a,b,c的最大公约数
      */
     public static int maxComFatr(int a, int b, int c) {

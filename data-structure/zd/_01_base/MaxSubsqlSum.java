@@ -46,7 +46,7 @@ public class MaxSubsqlSum {
 
     /** 分而治之 O(nlgn) */
     public int maxSubsqlSum_3(int[] A, int N) {
-        divideAndConquer(A, 0, N-1);
+        return divideAndConquer(A, 0, N-1);
     }
 
     private int divideAndConquer(int A[], int left, int right) {

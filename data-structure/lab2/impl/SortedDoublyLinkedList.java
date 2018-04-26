@@ -3,15 +3,14 @@ package impl;
 import java.util.Iterator;
 
 /**
- * DoublyLinkedList class<br/>
- * 4）声明双链表类DoublyLinkedList，实现LList接口中的方法。
+ * SortedDoublyLinkedList class<br/>
+ * 5）声明排序的双链表类。(升序
  * @author hdonghong
- * @date 2018/04/25
+ * @date 2018/04/26
  */
-public class DoublyLinkedList<E extends Comparable> implements LList<E> {
+public class SortedDoublyLinkedList<E extends Comparable> implements LList<E> {
 
     private Node<E> first;
-//    private Node<E> last;
     private int size;
 
     @Override
@@ -26,7 +25,9 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public E get(int i) {
-        if (i < 0 || i > size-1) throw new RuntimeException("emmm");
+        if (i < 0 || i > size-1) {
+            throw new RuntimeException("emmm");
+        }
         Iterator<E> iterator = iterator();
         E result = null;
         while (iterator.hasNext() && i-- >= 0) {
@@ -37,22 +38,26 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public void set(int i, E t) {
-        if (i < 0 || i > size-1) throw new RuntimeException("emmm");
+        if (i < 0 || i > size-1) {
+            throw new RuntimeException("emmm");
+        }
         Node<E> p = this.first;
         while (p != null && i-- > 0) {
             p = p.next;
         }
         p.data = t;
+        sort(p);
     }
 
     @Override
     public int insert(int i, E t) {
         if (i < 0 || i > size) {
-            throw new RuntimeException("emmm");
+            throw new RuntimeException("emmmm");
         }
+        Node<E> newNode = null;
         if (i == 0) {
             // 首部插入
-            Node<E> newNode = new Node<>(t, null, this.first);
+            newNode = new Node<>(t, null, this.first);
             if (!isEmpty()) {
                 this.first.prev = newNode;
             }
@@ -63,12 +68,14 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
                 // 遍历到目标位置的前一位
                 p = p.next;
             }
-            Node<E> newNode = new Node<>(t, p, p.next);
+            newNode = new Node<>(t, p, p.next);
             p.next = newNode;
             if (newNode.next != null) {
                 newNode.next.prev = newNode;
             }
         }
+
+        sort(newNode);
         size++;
 
         return i;
@@ -142,7 +149,9 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public int insertDifferent(E t) {
-        if (contains(t)) return 0;
+        if (contains(t)) {
+            return 0;
+        }
         insert(t);
         return 1;
     }
@@ -162,8 +171,9 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public E getLast() {
-        if (isEmpty())
+        if (isEmpty()) {
             return null;
+        }
         Node<E> p = this.first;
         while (p.next != null) {
             p = p.next;
@@ -174,7 +184,7 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            private Node<E> p = DoublyLinkedList.this.first;
+            private Node<E> p = SortedDoublyLinkedList.this.first;
 
             @Override
             public boolean hasNext() {
@@ -183,12 +193,57 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
             @Override
             public E next() {
-                if (!hasNext()) throw new RuntimeException("emmmm");
+                if (!hasNext()) {
+                    throw new RuntimeException("emmmm");
+                }
                 E data = p.data;
                 p = p.next;
                 return data;
             }
         };
+    }
+
+    private void sort(Node<E> currNode) {
+        if (currNode == null) {
+            throw new NullPointerException();
+        }
+        if (currNode.next != null && currNode.data.compareTo(currNode.next.data) > 0) {
+            // 比后面的数大 -> 后移
+            Node<E> p = currNode.next;
+            while (p.next != null && currNode.data.compareTo(p.next.data) > 0) {
+                p = p.next;
+            }
+
+            currNode.prev.next = currNode.next;
+            if (currNode.next != null) {
+                currNode.next.prev = currNode.prev;
+            }
+            currNode.next = p.next;
+            if (p.next != null) {
+                p.next.prev = currNode;
+            }
+            currNode.prev = p;
+            p.next = currNode;
+
+        } else if (currNode.prev != null && currNode.data.compareTo(currNode.prev.data) < 0) {
+            // 比前面的数小 -> 前移
+            Node<E> p = currNode.prev;
+            while (p.prev != null && currNode.data.compareTo(p.prev.data) < 0) {
+                p = p.prev;
+            }
+
+            currNode.prev.next = currNode.next;
+            if (currNode.next != null) {
+                currNode.next.prev = currNode.prev;
+            }
+            currNode.prev = p.prev;
+            if (p.prev != null) {
+                p.prev.next = currNode;
+            }
+            currNode.next = p;
+            p.prev = currNode;
+        }
+
     }
 
     private class Node<E> {

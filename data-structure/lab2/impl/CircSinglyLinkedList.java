@@ -77,6 +77,7 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
             if (p == this.last) {
                 // 如果刚好插入在尾部
                 this.last = newNode;
+                this.last.next = this.first;
             }
         }
         size++;
@@ -97,8 +98,8 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
             throw new RuntimeException("empty list");
         }
         if (i == 0) {
-            this.first = this.first.next;
-            this.last.next = this.first;
+            first = first.next == first ? null : first.next;
+            last.next = first;
         } else {
             Node<E> p = this.first;
             while (p != null && --i > 0) {
@@ -131,7 +132,7 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
     public int search(E key) {
         Iterator<E> iterator = iterator();
         int count = 0;
-        while (iterator.hasNext()) {
+        while (iterator.hasNext() && count < size) {
             if (key.compareTo(iterator.next()) == 0) {
                 return count;
             }
@@ -174,18 +175,28 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             private Node<E> p = CircSinglyLinkedList.this.first;
+            private int lastRet = -1;
 
             @Override
             public boolean hasNext() {
-                return p != null;
+                return p != null && size != 0;
             }
 
             @Override
             public E next() {
                 if (!hasNext()) throw new IndexOutOfBoundsException();
+                lastRet = (lastRet + 1)%size;
                 E result = p.data;
-                p = p.next;
+                p =  p.next;
                 return result;
+            }
+
+            @Override
+            public void remove() {
+                if (lastRet < 0) {
+                    throw new IllegalArgumentException("emm");
+                }
+                CircSinglyLinkedList.this.remove(lastRet--);
             }
         };
     }
@@ -209,7 +220,9 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
     public String toString() {
         StringBuilder builder = new StringBuilder("[");
         Iterator<E> iterator = iterator();
-        while (iterator.hasNext()) {
+        int count = 0;
+        while (iterator.hasNext() && count < size) {
+            ++count;
             builder.append(iterator.next()).append(",");
         }
         builder.append("]");

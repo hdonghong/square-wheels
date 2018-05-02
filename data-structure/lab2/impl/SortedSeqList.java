@@ -9,7 +9,7 @@ import java.util.Iterator;
  * @author hdonghong
  * @date 2018/04/06
  */
-public class SortedSeqList<T extends Comparable<? super T>> {
+public class SortedSeqList<T extends Comparable> {
     private boolean increase;// 设置递增或递减的字段，默认为递增
     protected T[] elements;// 元素
     protected int size;// 表中元素数量

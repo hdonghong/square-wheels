@@ -73,7 +73,7 @@ public interface LList<E extends Comparable> extends Iterable<E> {
      * @param key 指定元素
      * @return 元素的位置，从0开始，返回-1表示找不到
      */
-    int search(E key);
+    int indexOf(E key);
 
     /**
      * 从左向右，查找线性表中是否存在与key相等的元素

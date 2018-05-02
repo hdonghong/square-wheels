@@ -1,11 +1,7 @@
-package impl;
-
-
+import impl.CircSinglyLinkedList;
+import impl.LList;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 
 public class CircSinglyLinkedListTest {
@@ -97,13 +93,13 @@ public class CircSinglyLinkedListTest {
     }
 
     @Test
-    public void search() throws Exception {
+    public void indexOf() throws Exception {
         LList<String> list = new CircSinglyLinkedList<>();
         list.insert("a");
         list.insert("b");
         list.insert("c");
-        Assert.assertEquals(1, list.search("b"));
-        Assert.assertEquals(-1, list.search("bb"));
+        Assert.assertEquals(1, list.indexOf("b"));
+        Assert.assertEquals(-1, list.indexOf("bb"));
     }
 
     @Test

@@ -56,7 +56,7 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     }
 
     /** 若查找到指定对象，则返回结点，否则返回null */
-    public Node<E> search(E element) {
+    public Node<E> indexOf(E element) {
         Node<E> p = first;
         while (p != null && !p.data.equals(element)) {
             p = p.next;

@@ -116,7 +116,7 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
     @Override
     public int remove(E key) {
         int index;
-        if ((index = search(key)) != -1) {
+        if ((index = indexOf(key)) != -1) {
             remove(index);
         }
         return index;
@@ -129,7 +129,7 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
     }
 
     @Override
-    public int search(E key) {
+    public int indexOf(E key) {
         Iterator<E> iterator = iterator();
         int count = 0;
         while (iterator.hasNext() && count < size) {
@@ -143,7 +143,7 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public boolean contains(E key) {
-        return search(key) != -1;
+        return indexOf(key) != -1;
     }
 
     @Override
@@ -155,8 +155,12 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public void addAll(LList<E> list) {
+        int count = 0;
         for (E e : list) {
             insert(e);
+            if (++count >= list.size()) {
+                break;
+            }
         }
     }
 
@@ -200,7 +204,6 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
             }
         };
     }
-
 
     private class Node<E> {
         E data;

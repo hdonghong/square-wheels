@@ -59,7 +59,8 @@ public class SortedDoublyLinkedListTest {
         list.insert("a");
         list.insert("b");
         list.insert(1, "c");
-        Assert.assertEquals("[a,b,c,]", list.toString());
+        list.insert( "bb");
+        Assert.assertEquals("[a,b,bb,c,]", list.toString());
     }
 
     @Test
@@ -94,13 +95,13 @@ public class SortedDoublyLinkedListTest {
     }
 
     @Test
-    public void search() throws Exception {
+    public void indexOf() throws Exception {
         LList<String> list = new SortedDoublyLinkedList<>();
         list.insert("a");
         list.insert("b");
         list.insert("c");
-        Assert.assertEquals(1, list.search("b"));
-        Assert.assertEquals(-1, list.search("bb"));
+        Assert.assertEquals(1, list.indexOf("b"));
+        Assert.assertEquals(-1, list.indexOf("bb"));
     }
 
     @Test

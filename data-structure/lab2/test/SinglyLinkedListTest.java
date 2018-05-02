@@ -23,12 +23,12 @@ public class SinglyLinkedListTest {
     }
 
     @Test
-    public void search() throws Exception {
+    public void indexOf() throws Exception {
         SinglyLinkedList<String> list = new SinglyLinkedList<>(new String[]{"a", "bb", "cc"});
-        Assert.assertNotNull(list.search("a"));
-        Assert.assertNotNull(list.search("bb"));
-        Assert.assertNotNull(list.search("cc"));
-        Assert.assertNull(list.search("abc"));
+        Assert.assertNotNull(list.indexOf("a"));
+        Assert.assertNotNull(list.indexOf("bb"));
+        Assert.assertNotNull(list.indexOf("cc"));
+        Assert.assertNull(list.indexOf("abc"));
     }
 
     @Test

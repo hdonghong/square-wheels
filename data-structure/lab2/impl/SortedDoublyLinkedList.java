@@ -103,8 +103,8 @@ public class SortedDoublyLinkedList<E extends Comparable> implements LList<E> {
                 // 遍历到目标位置的前一位
                 p = p.next;
             }
+            p.next = p.next.next;
             if (p.next != null) {
-                p.next = p.next.next;
                 // 不是删除尾部元素
                 p.next.prev = p;
             }
@@ -116,7 +116,7 @@ public class SortedDoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public int remove(E key) {
-        int index = search(key);
+        int index = indexOf(key);
         if (index != -1) {
             remove(index);
         }
@@ -130,7 +130,7 @@ public class SortedDoublyLinkedList<E extends Comparable> implements LList<E> {
     }
 
     @Override
-    public int search(E key) {
+    public int indexOf(E key) {
         Iterator<E> iterator = iterator();
         int count = 0;
         while (iterator.hasNext()) {
@@ -144,7 +144,7 @@ public class SortedDoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public boolean contains(E key) {
-        return search(key) != -1;
+        return indexOf(key) != -1;
     }
 
     @Override
@@ -239,6 +239,9 @@ public class SortedDoublyLinkedList<E extends Comparable> implements LList<E> {
             currNode.prev = p.prev;
             if (p.prev != null) {
                 p.prev.next = currNode;
+            } else {
+                // p.prev == null 说明p是first
+                this.first = currNode;
             }
             currNode.next = p;
             p.prev = currNode;

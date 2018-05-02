@@ -109,7 +109,7 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public int remove(E key) {
-        int index = search(key);
+        int index = indexOf(key);
         if (index != -1) {
             remove(index);
         }
@@ -123,7 +123,7 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
     }
 
     @Override
-    public int search(E key) {
+    public int indexOf(E key) {
         Iterator<E> iterator = iterator();
         int count = 0;
         while (iterator.hasNext()) {
@@ -137,7 +137,7 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public boolean contains(E key) {
-        return search(key) != -1;
+        return indexOf(key) != -1;
     }
 
     @Override

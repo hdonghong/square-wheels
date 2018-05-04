@@ -97,7 +97,9 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
         if (isEmpty()) {
             throw new RuntimeException("empty list");
         }
+        E result = null;
         if (i == 0) {
+            result = first.data;
             first = first.next == first ? null : first.next;
             last.next = first;
         } else {
@@ -105,12 +107,13 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
             while (p != null && --i > 0) {
                 p = p.next;
             }
+            result = p.next.data;
             p.next = p.next.next;
         }
 
         size--;
 
-        return null;
+        return result;
     }
 
     @Override

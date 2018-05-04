@@ -16,7 +16,7 @@ public class Array<E> {
         this.size = 0;
     }
     public Array() {
-        this(0);
+        this(10);
     }
 
     /**
@@ -64,10 +64,10 @@ public class Array<E> {
      * @param e
      */
     public void add(int index, E e) {
-        if (size == data.length) {
-            throw new IllegalArgumentException("Add failed! Full array.");
-        }
         if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Add failed! Out of index. index = " + index);
+        }
+        if (size == data.length) {
             resize(data.length << 1);
         }
         for (int i = size; i > index; i--) {
@@ -97,6 +97,22 @@ public class Array<E> {
             throw new IllegalArgumentException("Get failed! Out of index.");
         }
         return data[index];
+    }
+
+    /**
+     * 获取首个元素
+     * @return
+     */
+    public E getFirst() {
+        return get(0);
+    }
+
+    /**
+     * 获取尾部元素
+     * @return
+     */
+    public E getLast() {
+        return get(size - 1);
     }
 
     /**

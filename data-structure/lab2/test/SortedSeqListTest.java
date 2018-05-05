@@ -1,5 +1,3 @@
-package test;
-
 import impl.SortedSeqList;
 import org.junit.Assert;
 import org.junit.Test;

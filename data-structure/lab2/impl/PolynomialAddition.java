@@ -22,6 +22,7 @@ public class PolynomialAddition {
         } else if (b == null || b.size() == 0) {
             return a;
         }
+        // 按指数排序单项式
         LList<Polynomial> sortedA = new SortedDoublyLinkedList<>();
         LList<Polynomial> sortedB = new SortedDoublyLinkedList<>();
         sortedA.addAll(a);
@@ -29,6 +30,7 @@ public class PolynomialAddition {
 
         int aI = 0;
         int bI = 0;
+        // 两个式子相加
         while (aI < sortedA.size() && bI < sortedB.size()) {
             Polynomial polynomialA = sortedA.get(aI);
             Polynomial polynomialB = sortedB.get(bI);
@@ -50,6 +52,7 @@ public class PolynomialAddition {
             }
         }
 
+        // 处理某个多项式剩余的部分
         while (aI < sortedA.size()) {
             Polynomial polynomialA = sortedA.get(aI++);
             result.insert(new Polynomial(polynomialA.exponent, polynomialA.coefficient));
@@ -59,6 +62,7 @@ public class PolynomialAddition {
             result.insert(new Polynomial(polynomialB.exponent, polynomialB.coefficient));
         }
 
+        // 合并多项式中指数相同的单项式
         for (int i = 0; i < result.size() - 1; i++) {
             Polynomial p = result.get(i);
             Polynomial pNext = result.get(i + 1);

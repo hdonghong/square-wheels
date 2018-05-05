@@ -27,13 +27,16 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        int opCount = 100000;
+        int opCount = 1000000;
 
         Queue<Integer> arrayQueue = new ArrayQueue<>();
         System.out.println("ArrayQueue: time = " + testQueue(arrayQueue, opCount) + " s");
 
         Queue<Integer> loopQueue = new LoopQueue<>();
         System.out.println("LoopQueue: time = " + testQueue(loopQueue, opCount) + " s");
+
+        Queue<Integer> linkedListQueue = new LinkedListQueue<>();
+        System.out.println("LinkedListQueue: time = " + testQueue(linkedListQueue, opCount) + " s");
 
 
     }

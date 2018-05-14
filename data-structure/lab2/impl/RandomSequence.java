@@ -15,15 +15,37 @@ import java.util.Random;
  */
 public class RandomSequence {
 
-    public static LList<Integer> getRandomSequence (int range) {
-        LList<Integer> result = new CircSinglyLinkedList<>();
+    private LList<Integer> result;
+
+    public RandomSequence() {
+        result = new CircSinglyLinkedList<>();
+    }
+
+    public LList<Integer> getRandomSequence (int range) {
         Random random = new Random();
+        int start = result.size() + 1;
         for (int i = 0; i < range; i++) {
             int value = 0;
-            while (result.contains(value = 1 + random.nextInt(range))) {}
+            while (result.contains(value = start + random.nextInt(range))) {}
             result.insert(value);
         }
+        return result;
+    }
 
+    public LList<Integer> addElements(int increment) {
+        if (increment <= 0) {
+            throw new IllegalArgumentException("某9394啊");
+        }
+        return getRandomSequence(increment);
+    }
+
+    public LList<Integer> remove(int decrement) {
+        if (decrement <= 0) {
+            throw new IllegalArgumentException("某9394啊");
+        }
+        while (decrement-- > 0) {
+            result.remove(result.size()-1);
+        }
         return result;
     }
 }

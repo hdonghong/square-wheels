@@ -11,7 +11,6 @@ import java.util.Iterator;
 public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     private Node<E> first;
-//    private Node<E> last;
     private int size;
 
     @Override
@@ -26,7 +25,9 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public E get(int i) {
-        if (i < 0 || i > size-1) throw new RuntimeException("emmm");
+        if (i < 0 || i > size-1) {
+            throw new RuntimeException("emmm");
+        }
         Iterator<E> iterator = iterator();
         E result = null;
         while (iterator.hasNext() && i-- >= 0) {
@@ -37,7 +38,9 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public void set(int i, E t) {
-        if (i < 0 || i > size-1) throw new RuntimeException("emmm");
+        if (i < 0 || i > size-1) {
+            throw new RuntimeException("emmm");
+        }
         Node<E> p = this.first;
         while (p != null && i-- > 0) {
             p = p.next;
@@ -142,17 +145,20 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public int insertDifferent(E t) {
-        if (contains(t)) return 0;
+        if (contains(t)) {
+            return 0;
+        }
         insert(t);
         return 1;
     }
 
     @Override
     public void addAll(LList<E> list) {
-        if (list != null)
+        if (list != null) {
             for (E e : list) {
                 insert(e);
             }
+        }
     }
 
     @Override
@@ -162,8 +168,9 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public E getLast() {
-        if (isEmpty())
+        if (isEmpty()) {
             return null;
+        }
         Node<E> p = this.first;
         while (p.next != null) {
             p = p.next;
@@ -183,7 +190,9 @@ public class DoublyLinkedList<E extends Comparable> implements LList<E> {
 
             @Override
             public E next() {
-                if (!hasNext()) throw new RuntimeException("emmmm");
+                if (!hasNext()) {
+                    throw new RuntimeException("emmmm");
+                }
                 E data = p.data;
                 p = p.next;
                 return data;

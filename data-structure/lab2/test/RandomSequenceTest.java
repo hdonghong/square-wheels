@@ -6,7 +6,10 @@ import static org.junit.Assert.*;
 public class RandomSequenceTest {
     @Test
     public void getRandomSequence() throws Exception {
-        System.out.println(RandomSequence.getRandomSequence(10));
+        RandomSequence sequence = new RandomSequence();
+        System.out.println(sequence.getRandomSequence(10));
+        System.out.println(sequence.addElements(10));
+        System.out.println(sequence.remove(10));
     }
 
 }

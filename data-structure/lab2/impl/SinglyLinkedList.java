@@ -105,17 +105,24 @@ public class SinglyLinkedList<E> implements Iterable<E> {
     /** 比较两条单链表是否相等 */
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (obj == this) return true;
-        if (!(obj instanceof SinglyLinkedList)) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof SinglyLinkedList)) {
+            return false;
+        }
         Iterator<E> itor1 = iterator();
         Iterator itor2 = ((SinglyLinkedList) obj).iterator();
         while (itor1.hasNext() && itor2.hasNext()) {
             E o1 = itor1.next();
             Object o2 = itor2.next();
             // 空或不等返回false
-            if (!(o1 == null ? o2 == null : o1.equals(o2)))
+            if (!(o1 == null ? o2 == null : o1.equals(o2))) {
                 return false;
+            }
         }
         return !(itor1.hasNext() || itor2.hasNext());
     }
@@ -161,8 +168,9 @@ public class SinglyLinkedList<E> implements Iterable<E> {
 
             @Override
             public E next() {
-                if (!hasNext())
+                if (!hasNext()) {
                     throw new IndexOutOfBoundsException("越界了");
+                }
                 E temp = this.p.data;
                 p = p.next;
                 return temp;

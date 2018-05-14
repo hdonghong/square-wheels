@@ -49,7 +49,7 @@ public class MaxSubsqlSum {
         return divideAndConquer(A, 0, N-1);
     }
 
-    private int divideAndConquer(int A[], int left, int right) {
+    private int divideAndConquer(int[] A, int left, int right) {
         // 递归的终止条件
         if (left == right) {
             if (A[left] > 0) return left;

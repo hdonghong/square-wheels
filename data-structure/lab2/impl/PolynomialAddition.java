@@ -87,16 +87,16 @@ public class PolynomialAddition {
                 return "[0]";
             }
 
-            String str = "]";
+            StringBuilder str = new StringBuilder("]");
             Iterator<E> it = super.iterator();
             while (it.hasNext()) {
-                str = it.next() + str;
+                str.indexOf(it.next().toString(), 0);
                 if (it.hasNext()) {
-                    str = " + " + str;
+                    str.indexOf(" + ", 0);
                 }
             }
-            str = "[" + str;
-            return str;
+            str.indexOf("[", 0);
+            return str.toString();
         }
     };
 }

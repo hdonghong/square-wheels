@@ -10,10 +10,14 @@ import java.util.Iterator;
  * @date 2018/04/06
  */
 public class SortedSeqList<T extends Comparable> {
-    private boolean increase;// 设置递增或递减的字段，默认为递增
-    protected T[] elements;// 元素
-    protected int size;// 表中元素数量
-    private static final int DEFAULT_LIST_CAPACITY = 10;// 默认初始容量
+    /** 设置递增或递减的字段，默认为递增 */
+    private boolean increase;
+    /** 元素 */
+    protected T[] elements;
+    /** 表中元素数量 */
+    protected int size;
+    /** 默认初始容量 */
+    private static final int DEFAULT_LIST_CAPACITY = 10;
 
     /**
      * 插入，元素插入位置由其值决定。
@@ -31,15 +35,15 @@ public class SortedSeqList<T extends Comparable> {
         if (increase) {
             for (i = 0;
                  i < size && data.compareTo(elements[i]) > 0;
-                 i++) ;
+                 i++) {}
         } else {
             for (i = 0;
                  i < size && data.compareTo(elements[i]) < 0;
-                 i++) ;
+                 i++) {}
         }
         for (int j = size-1;
              j >= i;
-             elements[j+1] = elements[j--]) ;
+             elements[j+1] = elements[j--]) {}
         elements[i] = data;
         size++;
     }
@@ -55,7 +59,7 @@ public class SortedSeqList<T extends Comparable> {
         }
         for (int i = index;
              i < size-1;
-             elements[i] = elements[++i]) ;
+             elements[i] = elements[++i]) {}
         elements[--size] = null;
     }
 
@@ -116,7 +120,9 @@ public class SortedSeqList<T extends Comparable> {
 
     @Override
     public String toString() {
-        if (empty()) return "[]";
+        if (empty()) {
+            return "[]";
+        }
         StringBuffer buffer = new StringBuffer("[");
         for (int i = 0; i < size; i++) {
             buffer.append(elements[i]).append(",");

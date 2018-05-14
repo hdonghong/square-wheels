@@ -151,7 +151,9 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public int insertDifferent(E t) {
-        if (contains(t)) return 0;
+        if (contains(t)) {
+            return 0;
+        }
         insert(t);
         return 1;
     }
@@ -191,7 +193,9 @@ public class CircSinglyLinkedList<E extends Comparable> implements LList<E> {
 
             @Override
             public E next() {
-                if (!hasNext()) throw new IndexOutOfBoundsException();
+                if (!hasNext()) {
+                    throw new IndexOutOfBoundsException();
+                }
                 lastRet = (lastRet + 1)%size;
                 E result = p.data;
                 p =  p.next;

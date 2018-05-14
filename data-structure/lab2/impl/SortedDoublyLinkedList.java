@@ -158,10 +158,11 @@ public class SortedDoublyLinkedList<E extends Comparable> implements LList<E> {
 
     @Override
     public void addAll(LList<E> list) {
-        if (list != null)
+        if (list != null) {
             for (E e : list) {
                 insert(e);
             }
+        }
     }
 
     @Override

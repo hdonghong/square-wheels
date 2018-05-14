@@ -17,7 +17,7 @@ public class Operation {
         int i;
         for (i = 0;
              i < table.length-1 && table[i] <= table[i+1];
-             i++);
+             i++) {}
         return i == table.length-1;
     }
     /**
@@ -29,7 +29,7 @@ public class Operation {
         int i;
         for (i = 0;
              i < table.length-1 && table[i].compareTo(table[i+1]) <= 0;
-             i++);
+             i++) {}
         return i == table.length-1;
     }
 

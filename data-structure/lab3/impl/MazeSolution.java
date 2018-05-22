@@ -11,6 +11,8 @@ import java.util.Stack;
  * 试寻找一条从入口到出口的路径，每一部只能从一个白色单元走到相邻的白色单元，直至出口。
  * 分别用栈和队列求解问题。
  * 这里用0表示不痛路，1表示通路，2表示走过路径
+ *
+ * blog https://blog.csdn.net/honhong1024/article/details/80375144
  * @author hdonghong
  * @date 2018/05/13
  */
@@ -138,8 +140,7 @@ public class MazeSolution {
             Point nextPoint = getNextPoint(visitedMark, visitedPoints.peek());
             // 如果走到死路，则回溯
             if (nextPoint == null) {
-                Point current = visitedPoints.pop();
-//                visitedMark[current.getY()][current.getX()] = false;
+                visitedPoints.pop();
                 continue;
             }
 

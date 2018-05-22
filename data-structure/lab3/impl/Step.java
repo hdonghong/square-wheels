@@ -32,56 +32,72 @@ public class Step {
         this.y = y;
     }
 
-    /** 上左 */
+    /**
+     * 上左
+     */
     public Step upLeft() {
         int x = this.x - 1;
         int y = this.y - 2;
         return (x >= 0 && y >= 0) ? new Step(x, y) : null;
     }
 
-    /** 上右, round指棋盘边界 */
+    /**
+     * 上右, round指棋盘边界
+     */
     public Step upRight(int round) {
         int x = this.x + 1;
         int y = this.y - 2;
         return (x <= round && y >= 0) ? new Step(x, y) : null;
     }
 
-    /** 右上，round指棋盘边界*/
+    /**
+     * 右上，round指棋盘边界
+     */
     public Step rightUp(int round) {
         int x = this.x + 2;
         int y = this.y - 1;
         return (x <= round && y >= 0) ? new Step(x, y) : null;
     }
 
-    /** 右下，round指棋盘边界*/
+    /**
+     * 右下，round指棋盘边界
+     */
     public Step rightDown(int round) {
         int x = this.x + 2;
         int y = this.y + 1;
         return (x <= round && y <= round) ? new Step(x, y) : null;
     }
 
-    /** 下右，round指棋盘边界*/
+    /**
+     * 下右，round指棋盘边界
+     */
     public Step downRight(int round) {
         int x = this.x + 1;
         int y = this.y + 2;
         return (x <= round && y <= round) ? new Step(x, y) : null;
     }
 
-    /** 下右，round指棋盘边界*/
+    /**
+     * 下左，round指棋盘边界
+     */
     public Step downLeft(int round) {
         int x = this.x - 1;
         int y = this.y + 2;
         return (x >= 0 && y <= round) ? new Step(x, y) : null;
     }
 
-    /** 左下，round指棋盘边界*/
+    /**
+     * 左下，round指棋盘边界
+     */
     public Step leftDown(int round) {
         int x = this.x - 2;
         int y = this.y + 1;
         return (x >= 0 && y <= round) ? new Step(x, y) : null;
     }
 
-    /** 左上，round指棋盘边界*/
+    /**
+     * 左上，round指棋盘边界
+     */
     public Step leftUp(int round) {
         int x = this.x - 2;
         int y = this.y - 1;
@@ -90,8 +106,12 @@ public class Step {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Step step = (Step) o;
         return (x == step.x) && (y == step.y);
@@ -104,4 +124,5 @@ public class Step {
         result = result << 5 - result + y;
         return result;
     }
+
 }

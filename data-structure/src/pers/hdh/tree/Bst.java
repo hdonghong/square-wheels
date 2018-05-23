@@ -28,38 +28,6 @@ public class Bst <E extends Comparable<E>> {
         size = 0;
     }
 
-    /** 增加元素 */
-    public void add(E e) {
-        if (e == null) {
-            throw new IllegalArgumentException("emmm null e ?");
-        }
-
-        if (root == null) {
-            ++size;
-            root = new Node(e);
-            return;
-        }
-        Node cur = root;
-        while (cur != null) {
-            if (e.compareTo(cur.e) < 0) {
-                if (cur.left == null) {
-                    cur.left = new Node(e);
-                    break;
-                }
-                cur = cur.left;
-            } else if (e.compareTo(cur.e) > 0) {
-                if (cur.right == null) {
-                    cur.right = new Node(e);
-                    break;
-                }
-                cur = cur.right;
-            } else {
-                return;
-            }
-        }
-        ++size;
-    }
-
     /** 递归增加元素 */
     public void addByRecusion(E e) {
         /*
@@ -95,5 +63,125 @@ public class Bst <E extends Comparable<E>> {
         if (e.compareTo(node.e) < 0) { node.left = addByRecusion(node.left, e); }
         else if (e.compareTo(node.e) > 0) { node.right = addByRecusion(node.right, e); }
         return node;
+    }
+
+    /** 增加元素 */
+    public void add(E e) {
+        if (e == null) {
+            throw new IllegalArgumentException("emmm null e ?");
+        }
+
+        if (root == null) {
+            ++size;
+            root = new Node(e);
+            return;
+        }
+        Node cur = root;
+        while (cur != null) {
+            if (e.compareTo(cur.e) < 0) {
+                if (cur.left == null) {
+                    cur.left = new Node(e);
+                    break;
+                }
+                cur = cur.left;
+            } else if (e.compareTo(cur.e) > 0) {
+                if (cur.right == null) {
+                    cur.right = new Node(e);
+                    break;
+                }
+                cur = cur.right;
+            } else {
+                return;
+            }
+        }
+        ++size;
+    }
+
+    /** 查看是否存在e */
+    public boolean containsByRecusion(E e) {
+        return contains(root, e);
+    }
+    private boolean contains(Node node, E e) {
+        if (node == null) {
+            return false;
+        }
+        int result = e.compareTo(node.e);
+
+        if (result < 0) {
+            return contains(node.left, e);
+        }
+        if (result > 0) {
+            return contains(node.right, e);
+        }
+        return true;
+    }
+
+    /** 迭代实现 TODO */
+    public boolean contains(E e) {
+        return false;
+    }
+
+    /** 先序遍历，递归实现 */
+    public void preOrderByRecusion() {
+        preOrder(root);
+    }
+    private void preOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        System.out.println(node.e);
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+
+    /** 中序遍历，递归实现 */
+    public void inOrderByRecusion() {
+        inOrder(root);
+    }
+    private void inOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        preOrder(node.left);
+        System.out.println(node.e);
+        preOrder(node.right);
+    }
+
+
+    /** 后序遍历，递归实现 */
+    public void OrderByRecusion() {
+        inOrder(root);
+    }
+    private void sOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        preOrder(node.left);
+        preOrder(node.right);
+        System.out.println(node.e);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        generateBSTString(root, 0, result);
+        return result.toString();
+    }
+
+    private void generateBSTString(Node node, int depth, StringBuilder result) {
+        if (node == null) {
+            result.append(generateDepthString(depth) + "null\n");
+        }
+
+        result.append(generateDepthString(depth) + node.e + "\n");
+        generateBSTString(node.left, depth + 1, result);
+        generateBSTString(node.right, depth + 1, result);
+    }
+    private String generateDepthString(int depth) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < depth; i++) {
+            result.append("--");
+        }
+        return result.toString();
     }
 }
